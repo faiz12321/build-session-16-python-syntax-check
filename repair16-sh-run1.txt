@@ -1,0 +1,83 @@
+### CMD: python --version
+Python 3.12.3
+### EXIT: 0
+
+### CMD: python make_sample.py
+Made sample/good.py, colon.py and indent.py
+### EXIT: 0
+
+### CMD: python make_sample.py
+Stopped: sample already exists. Nothing was replaced or deleted.
+### EXIT: 1
+
+### CMD: python -c "print(open('sample/colon.py').read())"
+import os
+
+
+def greet(name)
+    return "Hello " + name
+
+### EXIT: 0
+
+### CMD: python pycheck.py sample/colon.py
+Lines: 5
+def lines: 1
+### EXIT: 0
+
+### CMD: python pycheck.py sample/good.py
+Lines: 16
+Functions: 1  Classes: 1
+Imports: json, pathlib
+No syntax errors found. The code was not run.
+Imports are listed, not checked.
+### EXIT: 0
+
+### CMD: python pycheck.py sample/colon.py
+Could not parse: SyntaxError on line 4
+Message: expected ':'
+  4 | def greet(name)
+                     ^
+Only the first problem is shown. Fix it and run again.
+### EXIT: 1
+
+### CMD: python pycheck.py sample/indent.py
+Could not parse: IndentationError on line 5
+Message: unindent does not match any outer indentation level
+  5 |       return result
+                         ^
+Only the first problem is shown. Fix it and run again.
+### EXIT: 1
+
+### CMD: python -m unittest -v
+test_empty_file_is_valid (test_pycheck.CountTests.test_empty_file_is_valid) ... ok
+test_encoding_declaration_is_used (test_pycheck.CountTests.test_encoding_declaration_is_used) ... ok
+test_functions_and_classes_counted (test_pycheck.CountTests.test_functions_and_classes_counted) ... ok
+test_import_inside_function_is_listed (test_pycheck.CountTests.test_import_inside_function_is_listed) ... ok
+test_imports_listed_by_top_name (test_pycheck.CountTests.test_imports_listed_by_top_name) ... ok
+test_utf8_bom_is_accepted (test_pycheck.CountTests.test_utf8_bom_is_accepted) ... ok
+test_valid_file_has_no_error (test_pycheck.CountTests.test_valid_file_has_no_error) ... ok
+test_first_error_only (test_pycheck.ErrorTests.test_first_error_only) ... ok
+test_indentation_error_reports_line (test_pycheck.ErrorTests.test_indentation_error_reports_line) ... ok
+test_missing_colon_reports_line (test_pycheck.ErrorTests.test_missing_colon_reports_line) ... ok
+test_mixed_tabs_and_spaces (test_pycheck.ErrorTests.test_mixed_tabs_and_spaces) ... ok
+test_null_byte_is_an_error (test_pycheck.ErrorTests.test_null_byte_is_an_error) ... ok
+test_unclosed_bracket_is_an_error (test_pycheck.ErrorTests.test_unclosed_bracket_is_an_error) ... ok
+test_unindent_mismatch_reports_line (test_pycheck.ErrorTests.test_unindent_mismatch_reports_line) ... ok
+test_unterminated_string (test_pycheck.ErrorTests.test_unterminated_string) ... ok
+test_error_exit_one_with_line_and_caret (test_pycheck.ReportTests.test_error_exit_one_with_line_and_caret) ... ok
+test_good_file_exit_zero (test_pycheck.ReportTests.test_good_file_exit_zero) ... ok
+test_missing_file_exit_two (test_pycheck.ReportTests.test_missing_file_exit_two) ... ok
+test_wrong_arguments_exit_two (test_pycheck.ReportTests.test_wrong_arguments_exit_two) ... ok
+test_checking_does_not_change_the_file (test_pycheck.SafetyTests.test_checking_does_not_change_the_file) ... ok
+test_checking_does_not_run_the_code (test_pycheck.SafetyTests.test_checking_does_not_run_the_code) ... ok
+test_sample_files (test_pycheck.SampleTests.test_sample_files) ... ok
+test_cli_refuses_without_replacing (test_pycheck.SetupSafetyTests.test_cli_refuses_without_replacing) ... ok
+test_existing_file_preserved (test_pycheck.SetupSafetyTests.test_existing_file_preserved) ... ok
+test_existing_folder_preserves_nested_bytes_and_metadata (test_pycheck.SetupSafetyTests.test_existing_folder_preserves_nested_bytes_and_metadata) ... ok
+test_repeat_setup_preserves_generated_bytes_and_metadata (test_pycheck.SetupSafetyTests.test_repeat_setup_preserves_generated_bytes_and_metadata) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.039s
+
+OK
+### EXIT: 0

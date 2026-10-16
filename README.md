@@ -6,7 +6,7 @@ A small read-only Python tool built step by step. Give it a Python file and it a
 
     python make_sample.py                  # makes made-up scripts in sample/
     python pycheck.py sample/colon.py      # report on one script
-    python -m unittest -v                  # twenty-two automated tests
+    python -m unittest -v                  # 26 temporary-fixture tests
 
 On Windows, if `python` is not found, use `py`.
 
@@ -28,3 +28,11 @@ On Windows, if `python` is not found, use `py`.
 - Tested only on small made-up scripts. Python 3.10 and 3.12 on Linux, and, by GitHub Actions, Python 3.12 on Windows and Ubuntu. Not tested on a Windows 10 or 11 desktop.
 - Educational example, no warranty. Use at your own risk.
 - Code is MIT licensed (see LICENSE). Python is a separate project with its own license; this repository does not include it.
+
+## Setup safety and parser limits
+
+Setup refuses existing sample paths and exclusively creates three fictional Python files in a new sample folder. Start in a new empty lesson folder. Do not delete old work to force a retry. Four added setup collision/repeat/CLI tests preserve unrelated nested bytes and modification times. The checker is unchanged.
+
+Parser acceptance is narrower than successful compilation: ast.parse does not check every scope rule, so a top-level return can be parsed but still fail compilation. A no-error report means AST parsing succeeded, not that the script can compile or run. Python version affects grammar and messages. Whole-source bytes and the AST are held in memory; highly complex or untrusted source can exhaust memory or parser stack limits. This is not a security sandbox. Input links are followed. Reports print offending source lines as well as paths/errors, so keep private output private.
+
+Two Windows and two Ubuntu full replays pass all 26 tests. Each platform pair differs only in unittest time. Displays use first Windows output. Visible first/final source versions equal recorder inputs. The recorder uses a unique temporary folder and removes only that folder, while setup itself refuses repeats. Phone interaction and320/390/1280 layout checks pass. Tests remain small fictional fixtures, not real-source or desktop validation.
